@@ -44,6 +44,18 @@ Esta carpeta contiene **`app-release.apk`**, el instalador Android de **Nexus**.
 
 ---
 
+## Información legal (web pública)
+
+La política de privacidad y el resto de textos legales están en el **mismo dominio** donde está desplegado el frontend (Vercel u otro). Sustituye el host por el tuyo:
+
+- **Privacidad:** `https://TU-DOMINIO/legal/privacidad`
+- **Términos:** `https://TU-DOMINIO/legal/terminos`
+- **Aviso legal:** `https://TU-DOMINIO/legal/aviso-legal`
+
+En Google Play Console suele pedirse la URL de **privacidad**; usa la primera.
+
+---
+
 ## Instalación del APK en el móvil
 
 Copia `app-release.apk` al dispositivo, ábrelo y acepta instalar desde orígenes externos si Android lo solicita. No pasa por Google Play.
