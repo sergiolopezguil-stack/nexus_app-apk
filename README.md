@@ -1,31 +1,51 @@
 # Nexus app — APK
 
-Esta carpeta sirve para **almacenar y versionar** el paquete instalable de la aplicación **Nexus** en Android.
+Esta carpeta contiene **`app-release.apk`**, el instalador Android de **Nexus**. La app nativa solo envuelve la **misma aplicación web** (ERP en el navegador) dentro de un WebView; no es otra producto distinto.
 
-## ¿Qué hay aquí?
+---
 
-- **`app-release.apk`**: instalador Android (APK) de la app **Nexus**, generado a partir del proyecto Capacitor del frontend (`frontend/frontend/android`). La app es en esencia la **misma aplicación web** (Next.js en Vercel) ejecutándose dentro de un **WebView** nativo.
+## Resumen de la aplicación web (Nexus)
 
-No incluye el código fuente del ERP; solo el **binario** listo para instalar en dispositivos compatibles (sideload, pruebas internas, etc.).
+**Nexus** es un **ERP multiempresa** (SaaS): cada empresa tiene sus propios datos, usuarios y límites según su **plan** (Starter, Pro, Enterprise). La interfaz está en **español, inglés y catalán**.
 
-## Cómo se genera
+### Autenticación y empresa
 
-1. En el repo del frontend, con la URL de producción si aplica:
-   ```powershell
-   $env:CAPACITOR_SERVER_URL="https://tu-dominio.vercel.app"
-   npm run android:sync
-   ```
-2. Build firmado desde **Android Studio** (*Build → Generate Signed App Bundle / APK* → **APK**) o, según tu flujo, copiar aquí el APK release que Gradle deje en  
-   `frontend/frontend/android/app/build/outputs/apk/release/`.
+- Registro de empresa y administrador, inicio de sesión y perfil.
+- Datos fiscales y configuración de la empresa (moneda, NIF/CIF, dirección, etc.).
+- **Roles:** administrador de empresa, usuario estándar y **gestoría** (acceso muy limitado, orientado a facturas).
 
-## Instalación en el móvil
+### Gestión comercial y stock
 
-1. Copia `app-release.apk` al teléfono (USB, nube, etc.).
-2. Ábrelo y acepta instalar desde **orígenes desconocidos** si el sistema lo pide.
-3. **Google Play** no interviene**: es instalación directa del APK.
+- **Clientes:** alta, edición y consulta (CRM ligero); enlace con facturas.
+- **Productos y categorías:** catálogo con precios, IVA, stock y stock mínimo (alertas).
+- **Facturas:** numeración, fechas, líneas con producto o concepto manual, estados (pendiente, pagada, cancelada), totales e IVA.
+- **Exportaciones:** libro de ingresos en CSV/Excel/PDF por periodo, PDF por factura, paquetes ZIP de PDFs para gestoría.
 
-## Notas
+### Cobros y logística
 
-- Para **publicar en Play Store** lo habitual es subir un **Android App Bundle** (`.aab`), no este APK.
-- **Paquete de la app:** `com.colabstudio.nexus` (debe coincidir con el firmado).
-- Mantén alineadas **versión** y **notas de versión** con lo que publiques en otros sitios (por ejemplo `CHANGELOG.md` del frontend).
+- **Pagos** asociados a facturas (importe, método, fecha).
+- **Envíos** ligados a facturas: transportista, seguimiento, estados y fechas.
+
+### Organización
+
+- **Calendario y recordatorios** con avisos por correo (si el servidor tiene correo configurado).
+- **Tareas** tipo tablero (pendiente, en progreso, revisión, completado) con comentarios.
+
+### Análisis y administración
+
+- **Panel principal (dashboard):** resúmenes, gráficos de facturación, avisos de stock bajo, actividad reciente.
+- **Analytics:** ingresos por periodo, facturas por estado, productos con stock bajo (según plan).
+- **Usuarios de la empresa** (planes que lo permitan).
+- **Planes:** consulta del plan actual, límites de uso y solicitud de mejora de plan.
+
+### Plataforma
+
+- **Administración global** (`/platform-admin`) para operadores de plataforma: empresas, planes y usuarios, según emails autorizados en el backend.
+
+---
+
+## Instalación del APK en el móvil
+
+Copia `app-release.apk` al dispositivo, ábrelo y acepta instalar desde orígenes externos si Android lo solicita. No pasa por Google Play.
+
+**Identificador del paquete:** `com.colabstudio.nexus`.
